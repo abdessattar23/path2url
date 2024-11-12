@@ -151,7 +151,7 @@ If you found this package helpful, please consider:
 ## 📊 Project Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=abdessattar23&repo=path2url&theme=dark" alt="Repo Stats">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=abdessattar23&repo=path2url&theme=dark" alt="Repo Stats ">
 </div>
 
 ---
