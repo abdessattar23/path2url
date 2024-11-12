@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/abdessattar23/path2url/main/art/banner.png" alt="Path2URL Banner" width="600">
+<img src="https://raw.githubusercontent.com/abdessattar23/path2url/main/art/banner.png" alt="Path2URL Banner">
 
 # Path2URL
 > 🚀 A robust PHP library for converting relative paths to absolute URLs
