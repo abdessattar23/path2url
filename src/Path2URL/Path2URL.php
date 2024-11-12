@@ -37,7 +37,7 @@ class Path2URL
         $this->enableBackup = $enableBackup;
     }
 
-    public function process(): array
+    public function process(): array // Start process
     {
         $stats = ['total' => 0, 'success' => 0, 'failed' => 0];
         $this->processedFiles = [];
@@ -62,7 +62,7 @@ class Path2URL
         return $stats;
     }
 
-    private function processFile(string $file): bool
+    private function processFile(string $file): bool // Process file
     {
         try {
             if (!is_readable($file)) {
@@ -74,7 +74,6 @@ class Path2URL
                 throw new RuntimeException("Failed to read file: $file");
             }
 
-            // Create backup before modifying
             if (!$this->backupFile($file)) {
                 return false;
             }
@@ -98,11 +97,10 @@ class Path2URL
         }
     }
 
-    private function convertUrlsToAbsolute(string $content, string $relativeDirectory, string $fileExtension): string
+    private function convertUrlsToAbsolute(string $content, string $relativeDirectory, string $fileExtension): string // Convert URLs
     {
         switch ($fileExtension) {
             case 'html':
-                // Convert src and href attributes
                 $content = preg_replace_callback(
                     '/(src|href)=(["\'])(\.{1,2}\/[^"\']+)\2/i',
                     function ($matches) use ($relativeDirectory) {
@@ -114,7 +112,6 @@ class Path2URL
                 break;
 
             case 'css':
-                // Convert url() references
                 $content = preg_replace_callback(
                     '/url\((["\']?)(\.{1,2}\/[^)"\']+)\1\)/i',
                     function ($matches) use ($relativeDirectory) {
@@ -129,21 +126,16 @@ class Path2URL
         return $content;
     }
 
-    private function resolveAbsoluteUrl(string $relativePath, string $relativeDirectory): string
+    private function resolveAbsoluteUrl(string $relativePath, string $relativeDirectory): string // Resolve URL
     {
-        // Remove leading ./ from the path
         $path = preg_replace('/^\.\//', '', $relativePath);
-
-        // Split path into segments
         $pathSegments = explode('/', $path);
         $resultSegments = [];
 
-        // Process relative directory if it exists
         if (!empty($relativeDirectory)) {
             $resultSegments = explode('/', $relativeDirectory);
         }
 
-        // Process path segments
         foreach ($pathSegments as $segment) {
             if ($segment === '..') {
                 array_pop($resultSegments);
@@ -152,29 +144,24 @@ class Path2URL
             }
         }
 
-        // Build the final URL
         return $this->baseDomain . '/' . implode('/', $resultSegments);
     }
 
-    private function backupFile(string $filePath): bool
+    private function backupFile(string $filePath): bool // Backup file
     {
-        // If backup is disabled, return true without doing backup
         if (!$this->enableBackup) {
             return true;
         }
 
-        // Create backup directory if it doesn't exist
         $backupDir = dirname($this->directoryPath) . DIRECTORY_SEPARATOR . 'path2url_backup';
         if (!is_dir($backupDir) && !mkdir($backupDir, 0755, true)) {
             $this->log("Failed to create backup directory: $backupDir", 'ERROR');
             return false;
         }
 
-        // Create backup file path maintaining the original directory structure
         $relativeFilePath = str_replace($this->directoryPath, '', $filePath);
         $backupFilePath = $backupDir . $relativeFilePath . '.' . time() . '.bak';
         
-        // Create subdirectories if they don't exist
         $backupFileDir = dirname($backupFilePath);
         if (!is_dir($backupFileDir) && !mkdir($backupFileDir, 0755, true)) {
             $this->log("Failed to create backup subdirectory: $backupFileDir", 'ERROR');
@@ -190,7 +177,7 @@ class Path2URL
         return true;
     }
 
-    private function getFiles(): array
+    private function getFiles(): array // Get files
     {
         try {
             $files = [];
@@ -214,14 +201,14 @@ class Path2URL
         }
     }
 
-    private function log(string $message, string $level = 'INFO'): void
+    private function log(string $message, string $level = 'INFO'): void // Log message
     {
         $timestamp = date('Y-m-d H:i:s');
         $logMessage = "[$timestamp] [$level] $message" . PHP_EOL;
         file_put_contents($this->logFile, $logMessage, FILE_APPEND);
     }
 
-    public function getProcessedFiles(): array
+    public function getProcessedFiles(): array // Get processed
     {
         return $this->processedFiles;
     }
