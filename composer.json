@@ -1,0 +1,55 @@
+{
+    "name": "abdessattar23/path2url",
+    "description": "A robust PHP library that converts relative file paths to absolute URLs in HTML, CSS, and JavaScript files, with automatic backup creation and comprehensive logging",
+    "type": "library",
+    "keywords": [
+        "url-converter",
+        "path-converter",
+        "url-transformation",
+        "html-urls",
+        "css-urls",
+        "relative-to-absolute",
+        "path-resolver",
+        "url-processor",
+        "web-tools",
+        "php-url"
+    ],
+    "homepage": "https://github.com/abdessattar23/path2url",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "abdessattar23",
+            "homepage": "https://github.com/abdessattar23",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "mikey179/vfsstream": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Path2URL\\": "src/Path2URL/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "php ./tests/test.php"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/abdessattar23/path2url/issues",
+        "source": "https://github.com/abdessattar23/path2url"
+    }
+}
