@@ -161,9 +161,6 @@ If you found this package helpful, please consider:
 🔥 Created and maintained by [abdessattar23](https://github.com/abdessattar23)
 
 <br>
-
-<img src="https://raw.githubusercontent.com/abdessattar23/path2url/main/art/footer.png" alt="Footer" width="200">
-
 <br>
 
 If this package helps your project, please consider giving it a ⭐
